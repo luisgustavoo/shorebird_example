@@ -17,14 +17,17 @@ class HomePageViewModel extends ChangeNotifier {
   User? user;
 
   Future<Result<void>> _getUser() async {
-    final result = await _userRepository.getUser();
-    switch (result) {
-      case Ok<User?>():
-        user = result.value;
-        notifyListeners();
-        return Result.ok();
-      case Error<User?>():
-        return Result.error(result.error);
+    try {
+      final result = await _userRepository.getUser();
+      switch (result) {
+        case Ok<User?>():
+          user = result.value;
+          return Result.ok();
+        case Error<User?>():
+          return Result.error(result.error);
+      }
+    } finally {
+      notifyListeners();
     }
   }
 }

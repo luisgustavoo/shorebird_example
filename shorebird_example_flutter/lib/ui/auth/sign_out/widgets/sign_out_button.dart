@@ -19,19 +19,19 @@ class _SignOutButtonState extends State<SignOutButton> {
   @override
   void initState() {
     super.initState();
-    widget.signOutViewModel.addListener(_onResult);
+    widget.signOutViewModel.signOut.addListener(_onResult);
   }
 
   @override
   void didUpdateWidget(covariant SignOutButton oldWidget) {
     super.didUpdateWidget(oldWidget);
-    oldWidget.signOutViewModel.removeListener(_onResult);
-    widget.signOutViewModel.addListener(_onResult);
+    oldWidget.signOutViewModel.signOut.removeListener(_onResult);
+    widget.signOutViewModel.signOut.addListener(_onResult);
   }
 
   @override
   void dispose() {
-    widget.signOutViewModel.removeListener(_onResult);
+    widget.signOutViewModel.signOut.removeListener(_onResult);
     super.dispose();
   }
 

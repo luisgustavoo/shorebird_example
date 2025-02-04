@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shorebird_example_flutter/core/errors/failure.dart';
 import 'package:shorebird_example_flutter/data/repositories/auth/auth_repository.dart';
@@ -6,7 +5,7 @@ import 'package:shorebird_example_flutter/utils/command.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
 @LazySingleton()
-class SignOutViewModel extends ChangeNotifier {
+class SignOutViewModel {
   SignOutViewModel({
     required AuthRepository authRepository,
   }) : _authRepository = authRepository {
@@ -22,7 +21,6 @@ class SignOutViewModel extends ChangeNotifier {
     final result = await _authRepository.signOut();
     if (result is Error<void>) {
       error = result.error;
-      notifyListeners();
     }
 
     return result;

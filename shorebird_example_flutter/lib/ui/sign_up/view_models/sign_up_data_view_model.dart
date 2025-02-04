@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shorebird_example_flutter/data/repositories/sign_up/sign_up_repository.dart';
 import 'package:shorebird_example_flutter/utils/command.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
 @LazySingleton()
-class SignUpDataViewModel extends ChangeNotifier {
+class SignUpDataViewModel {
   SignUpDataViewModel({required SignUpRepository singUpRepository})
       : _singUpRepository = singUpRepository {
     signUp = Command1(_signUp);

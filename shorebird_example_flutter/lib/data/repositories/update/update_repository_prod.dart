@@ -21,6 +21,7 @@ class UpdateRepositoryProd extends UpdateRepository {
   Future<Result<void>> checkForUpdate() async {
     try {
       _status = await _updater.checkForUpdate(track: _currentTrack);
+      notifyListeners();
       return Result.ok();
     } on UpdateException catch (e, s) {
       log('Error checking for update: ${e.message}', error: e, stackTrace: s);
@@ -30,8 +31,16 @@ class UpdateRepositoryProd extends UpdateRepository {
 
   @override
   Future<Result<void>> download() async {
-    await _updater.update(track: _currentTrack);
-    return Result.ok();
+    try {
+      await _updater.update(track: _currentTrack);
+      return Result.ok();
+    } on Exception {
+      return Result.error(
+        Failure(
+          message: 'Não possível fazer download da nova versão',
+        ),
+      );
+    }
   }
 
   @override
