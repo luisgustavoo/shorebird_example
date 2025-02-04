@@ -59,53 +59,16 @@ class HomePageScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text.rich(
-                          TextSpan(
-                            text: 'Nome: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            children: [
-                              TextSpan(
-                                text: user?.userInfo?.userName ?? '',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        Text('Nome: ${user?.userInfo?.userName ?? ''}'),
                         const SizedBox(
                           height: 16,
                         ),
-                        Text.rich(
-                          TextSpan(
-                            text: 'Email: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            children: [
-                              TextSpan(
-                                text: user?.userInfo?.email ?? '',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        Text('Email: ${user?.userInfo?.email ?? ''}'),
                         const SizedBox(
                           height: 16,
                         ),
-                        Text.rich(
-                          TextSpan(
-                            text: 'Cor favorita: ',
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                            children: [
-                              TextSpan(
-                                text: user!.favoriteColor,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
+                        Text(
+                          'Cor favorita: ${user!.favoriteColor ?? 'Não informado'}',
                         ),
                       ],
                     ),
