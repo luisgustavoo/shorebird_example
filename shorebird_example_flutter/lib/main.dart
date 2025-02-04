@@ -6,7 +6,7 @@ import 'package:shorebird_example_flutter/routers/app_router.dart';
 Future<void> main() async {
   await bootstrap(
     () => App(
-      router: getIt<AppRouter>(),
+      appRouter: getIt<AppRouter>(),
     ),
   );
 }

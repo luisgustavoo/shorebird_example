@@ -5,14 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shorebird_example_flutter/config/dependencies.dart';
 import 'package:shorebird_example_flutter/data/repositories/auth/auth_repository.dart';
-import 'package:shorebird_example_flutter/data/repositories/user/user_repository.dart';
-import 'package:shorebird_example_flutter/data/services/api/environment/env.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
 import 'package:shorebird_example_flutter/ui/auth/sign_in/view_models/sign_in_view_model.dart';
 import 'package:shorebird_example_flutter/ui/auth/sign_in/widgets/sign_in_screen.dart';
 import 'package:shorebird_example_flutter/ui/home/view_models/home_page_view_model.dart';
 import 'package:shorebird_example_flutter/ui/home/widgets/home_page_screen.dart';
-
 import 'package:shorebird_example_flutter/ui/sign_up/view_models/sign_up_data_validation_view_model.dart';
 import 'package:shorebird_example_flutter/ui/sign_up/view_models/sign_up_data_view_model.dart';
 import 'package:shorebird_example_flutter/ui/sign_up/widgets/sign_up_data_screen.dart';
@@ -25,10 +22,7 @@ class AppRouter {
       : _authRepository = authRepository;
   final AuthRepository _authRepository;
 
-  GoRouter router(
-    UserRepository userRepository,
-  ) =>
-      GoRouter(
+  GoRouter get router => GoRouter(
         initialLocation: Routes.signin,
         refreshListenable: _authRepository,
         redirect: _redirect,
@@ -88,7 +82,6 @@ class AppRouter {
     BuildContext context,
     GoRouterState state,
   ) async {
-    if (Env.environment == 'dev') {}
     final isSignedIn = await _authRepository.isAuthenticated;
 
     final loggingIn = state.matchedLocation == Routes.signin;

@@ -32,6 +32,7 @@ import '../data/services/local/user/local_user_service.dart' as _i930;
 import '../data/services/shared_preferences_service.dart' as _i375;
 import '../routers/app_router.dart' as _i326;
 import '../ui/auth/sign_in/view_models/sign_in_view_model.dart' as _i978;
+import '../ui/auth/sign_out/view_models/sign_out_view_model.dart' as _i853;
 import '../ui/home/view_models/home_page_view_model.dart' as _i726;
 import '../ui/sign_up/view_models/sign_up_data_validation_view_model.dart'
     as _i161;
@@ -99,6 +100,8 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i978.SignInViewModel>(() =>
         _i978.SignInViewModel(authRepository: gh<_i401.AuthRepository>()));
+    gh.lazySingleton<_i853.SignOutViewModel>(() =>
+        _i853.SignOutViewModel(authRepository: gh<_i401.AuthRepository>()));
     gh.factory<_i326.AppRouter>(
         () => _i326.AppRouter(authRepository: gh<_i401.AuthRepository>()));
     gh.lazySingleton<_i522.UpdateRepository>(

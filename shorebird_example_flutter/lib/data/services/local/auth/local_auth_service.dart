@@ -41,7 +41,11 @@ class LocalAuthService {
     required String email,
     required String password,
   }) async {
-    return Result.ok(true);
+    final result = await _sharedPreferencesService.getUser();
+    return switch (result) {
+      Ok<User?>() => Result.ok(true),
+      _ => Result.error(Failure(message: 'Não foi possível fazer login')),
+    };
   }
 
   Future<Result<bool>> isSignedIn() async {
