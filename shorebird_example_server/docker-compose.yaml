@@ -1,0 +1,58 @@
+name: emcash-shorebird-server
+services:
+  # Development services
+  postgres:
+    image: postgres:16.3
+    # container_name: shorebird-example-server
+    ports:
+      - '8090:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: shorebird_example
+      POSTGRES_PASSWORD: "DiukqUfDKETtCXBy5nR1sfKeZ3m0BiCT"
+    volumes:
+      - shorebird_example_data:/var/lib/postgresql/data
+    profiles:
+      - '' # Default profile
+      - dev
+  redis:
+    image: redis:6.2.6
+    # container_name: shorebird-example-server
+    ports:
+      - '8091:6379'
+    command: redis-server --requirepass "TdOhQDcEz56jLEKSTHWtx6hSBSXBbo6G"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    profiles:
+      - '' # Default profile
+      - dev
+
+  # Test services
+  postgres_test:
+    image: postgres:16.3
+    # container_name: shorebird-example-server
+    ports:
+      - '9090:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: shorebird_example_test
+      POSTGRES_PASSWORD: "sOq93TPh52eQ0h6d_DVaR0xnHe3gHsu-"
+    volumes:
+      - shorebird_example_test_data:/var/lib/postgresql/data
+    profiles:
+      - '' # Default profile
+      - test
+  redis_test:
+    image: redis:6.2.6
+    ports:
+      - '9091:6379'
+    command: redis-server --requirepass "sqfvpmtebVt-2e9EJV-LjYU2KjK7e3di"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    profiles:
+      - '' # Default profile
+      - test
+
+volumes:
+  shorebird_example_data:
+  shorebird_example_test_data:

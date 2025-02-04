@@ -1,0 +1,7 @@
+class: User
+table: shorebird_example_user
+fields:
+    favoriteColor: String?
+    userInfo: module:auth:UserInfo?, relation
+
+

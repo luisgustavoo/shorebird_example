@@ -1,0 +1,5 @@
+exception: ServerException
+fields:
+  message: String, default='Ocorreu um erro no servidor'
+  errorCode: int?
+#   errorType: ErrorType

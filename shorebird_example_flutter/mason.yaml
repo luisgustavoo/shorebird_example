@@ -1,0 +1,4 @@
+bricks:
+  app_ui: ^0.0.4
+  theme:
+    path: ../../../flutter_bricks_theme/lib/theme

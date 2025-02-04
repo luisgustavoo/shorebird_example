@@ -1,0 +1,38 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "app",
+            "cwd": "shorebird_example_flutter",
+            "request": "launch",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define-from-file",
+                ".env"
+            ]
+        },
+        // {
+        //     "name": "app (profile mode)",
+        //     "cwd": "shorebird_example_flutter",
+        //     "request": "launch",
+        //     "type": "dart",
+        //     "flutterMode": "profile"
+        // },
+        // {
+        //     "name": "app (release mode)",
+        //     "cwd": "shorebird_example_flutter",
+        //     "request": "launch",
+        //     "type": "dart",
+        //     "flutterMode": "release"
+        // },
+        {
+            "name": "server",
+            "cwd": "shorebird_example_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
