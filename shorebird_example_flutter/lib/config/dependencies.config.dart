@@ -12,9 +12,14 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../data/repositories/auth/auth_repository.dart' as _i401;
+import '../data/repositories/auth/auth_repository_local.dart' as _i727;
+import '../data/repositories/auth/auth_repository_remote.dart' as _i399;
 import '../data/repositories/sign_in/sign_in_repository.dart' as _i194;
+import '../data/repositories/sign_in/sign_in_repository_local.dart' as _i174;
 import '../data/repositories/sign_in/sign_in_repository_remote.dart' as _i646;
 import '../data/repositories/sign_up/sign_up_repository.dart' as _i525;
+import '../data/repositories/sign_up/sing_up_repository_local.dart' as _i198;
 import '../data/repositories/sign_up/sing_up_repository_remote.dart' as _i208;
 import '../data/repositories/update/update_repository.dart' as _i522;
 import '../data/repositories/update/update_repository_beta.dart' as _i699;
@@ -28,6 +33,7 @@ import '../data/services/api/user/user_api_client.dart' as _i530;
 import '../data/services/local/auth/local_auth_service.dart' as _i33;
 import '../data/services/local/user/local_user_service.dart' as _i930;
 import '../data/services/shared_preferences_service.dart' as _i375;
+import '../routers/app_router.dart' as _i326;
 import '../ui/home/view_models/home_page_view_model.dart' as _i726;
 import '../ui/sign_in/view_models/sign_in_view_model.dart' as _i509;
 import '../ui/sign_up/view_models/sign_up_data_validation_view_model.dart'
@@ -74,6 +80,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i33.LocalAuthService>(() => _i33.LocalAuthService(
         sharedPreferencesService: gh<_i375.SharedPreferencesService>()));
+    gh.factory<_i525.SignUpRepository>(
+      () => _i198.SingUpRepositoryLocal(
+          localAuthService: gh<_i33.LocalAuthService>()),
+      registerFor: {_dev},
+    );
+    gh.factory<_i194.SignInRepository>(
+      () => _i174.SignInRepositoryLocal(
+          localAuthService: gh<_i33.LocalAuthService>()),
+      registerFor: {_dev},
+    );
     gh.factory<_i194.SignInRepository>(
       () => _i646.SignInRepositoryRemote(
           authApiClient: gh<_i1057.AuthApiClient>()),
@@ -89,8 +105,18 @@ extension GetItInjectableX on _i174.GetIt {
             singUpRepository: gh<_i525.SignUpRepository>()));
     gh.lazySingleton<_i37.SplashViewModel>(() =>
         _i37.SplashViewModel(updateRepository: gh<_i522.UpdateRepository>()));
+    gh.lazySingleton<_i401.AuthRepository>(
+      () =>
+          _i399.AuthRepositoryRemote(authApiClient: gh<_i1057.AuthApiClient>()),
+      registerFor: {
+        _prod,
+        _staging,
+      },
+    );
     gh.lazySingleton<_i509.SignInViewModel>(() =>
         _i509.SignInViewModel(signInRepository: gh<_i194.SignInRepository>()));
+    gh.factory<_i326.AppRouter>(
+        () => _i326.AppRouter(authRepository: gh<_i401.AuthRepository>()));
     gh.lazySingleton<_i522.UpdateRepository>(
       () => _i1054.UpdateRepositoryProd(),
       registerFor: {_prod},
@@ -108,11 +134,18 @@ extension GetItInjectableX on _i174.GetIt {
           sharedPreferencesService: gh<_i375.SharedPreferencesService>()),
       registerFor: {_dev},
     );
+    gh.lazySingleton<_i401.AuthRepository>(
+      () => _i727.AuthRepositoryLocal(
+          localAuthService: gh<_i33.LocalAuthService>()),
+      registerFor: {_dev},
+    );
     gh.lazySingleton<_i726.HomePageViewModel>(() =>
         _i726.HomePageViewModel(userRepository: gh<_i958.UserRepository>()));
     gh.factory<_i958.UserRepository>(
       () => _i809.UserRepositoryLocal(
-          localUserService: gh<_i930.LocalUserService>()),
+        localUserService: gh<_i930.LocalUserService>(),
+        localAuthService: gh<_i33.LocalAuthService>(),
+      ),
       registerFor: {_dev},
     );
     return this;

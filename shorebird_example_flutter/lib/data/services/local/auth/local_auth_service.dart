@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:shorebird_example_client/shorebird_example_client.dart';
+import 'package:shorebird_example_flutter/core/errors/failure.dart';
 import 'package:shorebird_example_flutter/data/services/shared_preferences_service.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
@@ -24,6 +25,7 @@ class LocalAuthService {
     required String verificationCode,
     String? favoriteColor,
   }) async {
+    await _sharedPreferencesService.clear();
     await _sharedPreferencesService.saveUser(
       User(
         id: 1,
@@ -40,5 +42,17 @@ class LocalAuthService {
     required String password,
   }) async {
     return Result.ok(true);
+  }
+
+  Future<Result<bool>> isSignedIn() async {
+    final result = await _sharedPreferencesService.getUser();
+    return switch (result) {
+      Ok<User?>() => Result.ok(true),
+      _ => Result.error(Failure(message: 'Usuário não logado')),
+    };
+  }
+
+  Future<Result<void>> signOut() async {
+    return _sharedPreferencesService.clear();
   }
 }

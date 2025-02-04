@@ -31,4 +31,10 @@ class SharedPreferencesService {
     }
     return Result.ok();
   }
+
+  Future<Result<void>> clear() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+    return Result.ok();
+  }
 }
