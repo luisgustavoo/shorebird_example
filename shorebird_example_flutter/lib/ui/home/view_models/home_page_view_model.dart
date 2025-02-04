@@ -10,7 +10,7 @@ class HomePageViewModel extends ChangeNotifier {
   HomePageViewModel({
     required UserRepository userRepository,
   }) : _userRepository = userRepository {
-    getUser = Command0(_getUser);
+    getUser = Command0(_getUser)..execute();
   }
   final UserRepository _userRepository;
   late final Command0<void> getUser;

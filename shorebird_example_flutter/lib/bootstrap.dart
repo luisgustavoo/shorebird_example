@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
-import 'package:shorebird_example_flutter/config/app_config.dart';
+import 'package:shorebird_example_flutter/config/dependencies.dart';
 import 'package:shorebird_example_flutter/data/services/api/serverpod_client.dart';
 
 class AppBlocObserver extends BlocObserver {

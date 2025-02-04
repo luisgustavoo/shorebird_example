@@ -11,7 +11,9 @@
             "type": "dart",
             "toolArgs": [
                 "--dart-define-from-file",
-                ".env"
+                ".env",
+                // "--dart-define",
+                // "environment='dev'",
             ]
         },
         // {

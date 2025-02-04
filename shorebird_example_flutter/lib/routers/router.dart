@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shorebird_example_flutter/config/app_config.dart';
+import 'package:shorebird_example_flutter/config/dependencies.dart';
 import 'package:shorebird_example_flutter/data/services/api/serverpod_client.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
 import 'package:shorebird_example_flutter/ui/home/view_models/home_page_view_model.dart';
@@ -63,7 +63,7 @@ final router = GoRouter(
       path: Routes.home,
       builder: (context, state) {
         return HomePageScreen(
-          homePageViewModel: getIt<HomePageViewModel>()..getUser.execute(),
+          homePageViewModel: getIt<HomePageViewModel>()..getUser,
         );
       },
     ),

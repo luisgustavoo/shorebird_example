@@ -1,17 +1,15 @@
 import 'package:injectable/injectable.dart';
-import 'package:shorebird_example_flutter/config/dependencies.dart';
 import 'package:shorebird_example_flutter/data/repositories/sign_up/sign_up_repository.dart';
-import 'package:shorebird_example_flutter/data/services/api/auth/auth_api_client.dart';
+import 'package:shorebird_example_flutter/data/services/local/auth/local_auth_service.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
-@prod
-@staging
+@dev
 @Injectable(as: SignUpRepository)
-class SingUpRepositoryRemote implements SignUpRepository {
-  SingUpRepositoryRemote({required AuthApiClient authApiClient})
-      : _authApiClient = authApiClient;
+class SingUpRepositoryLocal implements SignUpRepository {
+  SingUpRepositoryLocal({required LocalAuthService localAuthService})
+      : _localAuthService = localAuthService;
 
-  final AuthApiClient _authApiClient;
+  final LocalAuthService _localAuthService;
 
   @override
   Future<Result<bool>> signUp({
@@ -19,7 +17,7 @@ class SingUpRepositoryRemote implements SignUpRepository {
     required String email,
     required String password,
   }) async {
-    final result = await _authApiClient.createAccountRequest(
+    final result = await _localAuthService.createAccountRequest(
       userName: userName,
       email: email,
       password: password,
@@ -33,7 +31,7 @@ class SingUpRepositoryRemote implements SignUpRepository {
     required String verificationCode,
     String? favoriteColor,
   }) async {
-    final result = await _authApiClient.validateAccount(
+    final result = await _localAuthService.validateAccount(
       email: email,
       verificationCode: verificationCode,
       favoriteColor: favoriteColor,
