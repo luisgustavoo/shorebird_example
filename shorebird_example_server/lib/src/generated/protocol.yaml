@@ -1,4 +1,4 @@
 auth:
   - createUser:
 user:
-  - findUser:
+  - getUser:

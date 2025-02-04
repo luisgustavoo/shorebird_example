@@ -16,7 +16,11 @@ import '../data/repositories/sign_in/sign_in_repository.dart' as _i194;
 import '../data/repositories/sign_in/sign_in_repository_remote.dart' as _i646;
 import '../data/repositories/sign_up/sign_up_repository.dart' as _i525;
 import '../data/repositories/sign_up/sing_up_repository_remote.dart' as _i208;
+import '../data/repositories/user/use_repository_remote.dart' as _i810;
+import '../data/repositories/user/user_repository.dart' as _i958;
 import '../data/services/api/auth/auth_api_client.dart' as _i1057;
+import '../data/services/api/user/user_api_client.dart' as _i530;
+import '../ui/home/view_models/home_page_view_model.dart' as _i726;
 import '../ui/sign_in/view_models/sign_in_view_model.dart' as _i509;
 import '../ui/sign_up/view_models/sign_up_data_validation_view_model.dart'
     as _i161;
@@ -34,6 +38,11 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.factory<_i1057.AuthApiClient>(() => _i1057.AuthApiClient());
+    gh.factory<_i530.UserApiClient>(() => _i530.UserApiClient());
+    gh.factory<_i958.UserRepository>(() =>
+        _i810.UserRepositoryRemote(userApiClient: gh<_i530.UserApiClient>()));
+    gh.lazySingleton<_i726.HomePageViewModel>(() =>
+        _i726.HomePageViewModel(userRepository: gh<_i958.UserRepository>()));
     gh.factory<_i525.SignUpRepository>(() => _i208.SingUpRepositoryRemote(
         authApiClient: gh<_i1057.AuthApiClient>()));
     gh.factory<_i194.SignInRepository>(() => _i646.SignInRepositoryRemote(

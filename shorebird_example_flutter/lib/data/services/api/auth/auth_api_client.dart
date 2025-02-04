@@ -70,7 +70,7 @@ class AuthApiClient {
 
       return switch (userInfo) {
         != null => Result.ok(true),
-        _ => Result.ok(false),
+        _ => Result.error(Failure(message: 'Não foi possível fazer login')),
       };
     } on ServerException catch (e, s) {
       _log.severe('Erro ao realizar login', e, s);

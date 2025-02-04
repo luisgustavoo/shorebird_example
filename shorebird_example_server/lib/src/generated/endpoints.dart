@@ -39,8 +39,8 @@ class Endpoints extends _i1.EndpointDispatch {
         'createUser': _i1.MethodConnector(
           name: 'createUser',
           params: {
-            'user': _i1.ParameterDescription(
-              name: 'user',
+            'userData': _i1.ParameterDescription(
+              name: 'userData',
               type: _i1.getType<_i4.User>(),
               nullable: false,
             )
@@ -51,7 +51,7 @@ class Endpoints extends _i1.EndpointDispatch {
           ) async =>
               (endpoints['auth'] as _i2.AuthEndpoint).createUser(
             session,
-            params['user'],
+            params['userData'],
           ),
         )
       },
@@ -60,14 +60,14 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'user',
       endpoint: endpoints['user']!,
       methodConnectors: {
-        'findUser': _i1.MethodConnector(
-          name: 'findUser',
+        'getUser': _i1.MethodConnector(
+          name: 'getUser',
           params: {},
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['user'] as _i3.UserEndpoint).findUser(session),
+              (endpoints['user'] as _i3.UserEndpoint).getUser(session),
         )
       },
     );

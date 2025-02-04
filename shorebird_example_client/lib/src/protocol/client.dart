@@ -22,11 +22,11 @@ class EndpointAuth extends _i1.EndpointRef {
   @override
   String get name => 'auth';
 
-  _i2.Future<_i3.User> createUser(_i3.User user) =>
+  _i2.Future<_i3.User> createUser(_i3.User userData) =>
       caller.callServerEndpoint<_i3.User>(
         'auth',
         'createUser',
-        {'user': user},
+        {'userData': userData},
       );
 }
 
@@ -37,9 +37,9 @@ class EndpointUser extends _i1.EndpointRef {
   @override
   String get name => 'user';
 
-  _i2.Future<_i3.User?> findUser() => caller.callServerEndpoint<_i3.User?>(
+  _i2.Future<_i3.User?> getUser() => caller.callServerEndpoint<_i3.User?>(
         'user',
-        'findUser',
+        'getUser',
         {},
       );
 }

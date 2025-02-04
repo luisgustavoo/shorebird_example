@@ -78,6 +78,9 @@ abstract final class AppTheme {
       color: Colors.white,
     ),
   );
+  static const _cardThemeData = CardThemeData(
+    color: AppColors.grey2,
+  );
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -96,5 +99,6 @@ abstract final class AppTheme {
     inputDecorationTheme: _inputDecorationTheme,
     elevatedButtonTheme: _elevatedButtonTheme,
     sliderTheme: _sliderThemeData,
+    cardTheme: _cardThemeData,
   );
 }

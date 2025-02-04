@@ -130,7 +130,7 @@ class _AuthEndpoint {
 
   _i3.Future<_i4.User> createUser(
     _i1.TestSessionBuilder sessionBuilder,
-    _i4.User user,
+    _i4.User userData,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -143,7 +143,7 @@ class _AuthEndpoint {
           createSessionCallback: (_) => _localUniqueSession,
           endpointPath: 'auth',
           methodName: 'createUser',
-          parameters: _i1.testObjectToJson({'user': user}),
+          parameters: _i1.testObjectToJson({'userData': userData}),
           serializationManager: _serializationManager,
         );
         var _localReturnValue = await (_localCallContext.method.call(
@@ -168,18 +168,18 @@ class _UserEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<_i4.User?> findUser(_i1.TestSessionBuilder sessionBuilder) async {
+  _i3.Future<_i4.User?> getUser(_i1.TestSessionBuilder sessionBuilder) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
           (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
         endpoint: 'user',
-        method: 'findUser',
+        method: 'getUser',
       );
       try {
         var _localCallContext = await _endpointDispatch.getMethodCallContext(
           createSessionCallback: (_) => _localUniqueSession,
           endpointPath: 'user',
-          methodName: 'findUser',
+          methodName: 'getUser',
           parameters: _i1.testObjectToJson({}),
           serializationManager: _serializationManager,
         );

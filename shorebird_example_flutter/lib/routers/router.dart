@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:shorebird_example_flutter/config/app_config.dart';
 import 'package:shorebird_example_flutter/data/services/api/serverpod_client.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
+import 'package:shorebird_example_flutter/ui/home/view_models/home_page_view_model.dart';
+import 'package:shorebird_example_flutter/ui/home/widgets/home_page_screen.dart';
 import 'package:shorebird_example_flutter/ui/sign_in/view_models/sign_in_view_model.dart';
 import 'package:shorebird_example_flutter/ui/sign_in/widgets/sign_in_screen.dart';
 import 'package:shorebird_example_flutter/ui/sign_up/view_models/sign_up_data_validation_view_model.dart';
@@ -60,7 +62,9 @@ final router = GoRouter(
     GoRoute(
       path: Routes.home,
       builder: (context, state) {
-        return Container();
+        return HomePageScreen(
+          homePageViewModel: getIt<HomePageViewModel>()..getUser.execute(),
+        );
       },
     ),
   ],

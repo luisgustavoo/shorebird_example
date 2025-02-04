@@ -33,6 +33,7 @@ class SingUpRepositoryRemote implements SignUpRepository {
     final result = await _authApiClient.validateAccount(
       email: email,
       verificationCode: verificationCode,
+      favoriteColor: favoriteColor,
     );
 
     return result;
