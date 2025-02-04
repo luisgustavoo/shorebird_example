@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shorebird_example_flutter/core/errors/failure.dart';
-import 'package:shorebird_example_flutter/data/repositories/sign_in/sign_in_repository.dart';
+import 'package:shorebird_example_flutter/data/repositories/auth/auth_repository.dart';
+
 import 'package:shorebird_example_flutter/utils/command.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
 @LazySingleton()
 class SignInViewModel extends ChangeNotifier {
-  SignInViewModel({required SignInRepository signInRepository})
-      : _signInRepository = signInRepository {
+  SignInViewModel({required AuthRepository authRepository})
+      : _authRepository = authRepository {
     signIn = Command1(_signIn);
   }
-  final SignInRepository _signInRepository;
+  final AuthRepository _authRepository;
   Failure? error;
 
   late final Command1<
@@ -29,14 +30,13 @@ class SignInViewModel extends ChangeNotifier {
   ) async {
     final (email: email, password: password) = credentials;
     final result =
-        await _signInRepository.signIn(email: email, password: password);
-    switch (result) {
-      case Error<bool>():
-        error = result.error;
-        notifyListeners();
-        break;
-      default:
+        await _authRepository.signIn(email: email, password: password);
+
+    if (result is Error<bool>) {
+      error = result.error;
+      notifyListeners();
     }
+
     return result;
   }
 }

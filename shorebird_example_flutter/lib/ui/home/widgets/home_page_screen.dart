@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shorebird_example_flutter/data/services/api/serverpod_client.dart';
-import 'package:shorebird_example_flutter/routers/routes.dart';
+import 'package:shorebird_example_flutter/config/dependencies.dart';
+import 'package:shorebird_example_flutter/ui/auth/sign_out/view_models/sign_out_view_model.dart';
+import 'package:shorebird_example_flutter/ui/auth/sign_out/widgets/sign_out_button.dart';
 import 'package:shorebird_example_flutter/ui/home/view_models/home_page_view_model.dart';
 
 class HomePageScreen extends StatelessWidget {
@@ -18,15 +18,8 @@ class HomePageScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
         actions: [
-          IconButton(
-            onPressed: () async {
-              final go = context.go;
-              final disconnected = await sessionManager.signOutDevice();
-              if (disconnected) {
-                go(Routes.signin);
-              }
-            },
-            icon: const Icon(Icons.logout),
+          SignOutButton(
+            signOutViewModel: getIt<SignOutViewModel>(),
           ),
         ],
       ),

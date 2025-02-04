@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
+import 'package:shorebird_example_flutter/ui/auth/sign_in/view_models/sign_in_view_model.dart';
 import 'package:shorebird_example_flutter/ui/core/themes/colors.dart';
 import 'package:shorebird_example_flutter/ui/core/ui/custom_snack_bar.dart';
-import 'package:shorebird_example_flutter/ui/sign_in/view_models/sign_in_view_model.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({

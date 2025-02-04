@@ -15,9 +15,6 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../data/repositories/auth/auth_repository.dart' as _i401;
 import '../data/repositories/auth/auth_repository_local.dart' as _i727;
 import '../data/repositories/auth/auth_repository_remote.dart' as _i399;
-import '../data/repositories/sign_in/sign_in_repository.dart' as _i194;
-import '../data/repositories/sign_in/sign_in_repository_local.dart' as _i174;
-import '../data/repositories/sign_in/sign_in_repository_remote.dart' as _i646;
 import '../data/repositories/sign_up/sign_up_repository.dart' as _i525;
 import '../data/repositories/sign_up/sing_up_repository_local.dart' as _i198;
 import '../data/repositories/sign_up/sing_up_repository_remote.dart' as _i208;
@@ -34,8 +31,8 @@ import '../data/services/local/auth/local_auth_service.dart' as _i33;
 import '../data/services/local/user/local_user_service.dart' as _i930;
 import '../data/services/shared_preferences_service.dart' as _i375;
 import '../routers/app_router.dart' as _i326;
+import '../ui/auth/sign_in/view_models/sign_in_view_model.dart' as _i978;
 import '../ui/home/view_models/home_page_view_model.dart' as _i726;
-import '../ui/sign_in/view_models/sign_in_view_model.dart' as _i509;
 import '../ui/sign_up/view_models/sign_up_data_validation_view_model.dart'
     as _i161;
 import '../ui/sign_up/view_models/sign_up_data_view_model.dart' as _i887;
@@ -85,19 +82,6 @@ extension GetItInjectableX on _i174.GetIt {
           localAuthService: gh<_i33.LocalAuthService>()),
       registerFor: {_dev},
     );
-    gh.factory<_i194.SignInRepository>(
-      () => _i174.SignInRepositoryLocal(
-          localAuthService: gh<_i33.LocalAuthService>()),
-      registerFor: {_dev},
-    );
-    gh.factory<_i194.SignInRepository>(
-      () => _i646.SignInRepositoryRemote(
-          authApiClient: gh<_i1057.AuthApiClient>()),
-      registerFor: {
-        _prod,
-        _staging,
-      },
-    );
     gh.lazySingleton<_i887.SignUpDataViewModel>(() => _i887.SignUpDataViewModel(
         singUpRepository: gh<_i525.SignUpRepository>()));
     gh.lazySingleton<_i161.SignUpDataValidationViewModel>(() =>
@@ -113,8 +97,8 @@ extension GetItInjectableX on _i174.GetIt {
         _staging,
       },
     );
-    gh.lazySingleton<_i509.SignInViewModel>(() =>
-        _i509.SignInViewModel(signInRepository: gh<_i194.SignInRepository>()));
+    gh.lazySingleton<_i978.SignInViewModel>(() =>
+        _i978.SignInViewModel(authRepository: gh<_i401.AuthRepository>()));
     gh.factory<_i326.AppRouter>(
         () => _i326.AppRouter(authRepository: gh<_i401.AuthRepository>()));
     gh.lazySingleton<_i522.UpdateRepository>(

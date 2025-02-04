@@ -8,10 +8,11 @@ import 'package:shorebird_example_flutter/data/repositories/auth/auth_repository
 import 'package:shorebird_example_flutter/data/repositories/user/user_repository.dart';
 import 'package:shorebird_example_flutter/data/services/api/environment/env.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
+import 'package:shorebird_example_flutter/ui/auth/sign_in/view_models/sign_in_view_model.dart';
+import 'package:shorebird_example_flutter/ui/auth/sign_in/widgets/sign_in_screen.dart';
 import 'package:shorebird_example_flutter/ui/home/view_models/home_page_view_model.dart';
 import 'package:shorebird_example_flutter/ui/home/widgets/home_page_screen.dart';
-import 'package:shorebird_example_flutter/ui/sign_in/view_models/sign_in_view_model.dart';
-import 'package:shorebird_example_flutter/ui/sign_in/widgets/sign_in_screen.dart';
+
 import 'package:shorebird_example_flutter/ui/sign_up/view_models/sign_up_data_validation_view_model.dart';
 import 'package:shorebird_example_flutter/ui/sign_up/view_models/sign_up_data_view_model.dart';
 import 'package:shorebird_example_flutter/ui/sign_up/widgets/sign_up_data_screen.dart';
