@@ -1,10 +1,13 @@
 import 'package:injectable/injectable.dart';
 import 'package:logging/logging.dart';
 import 'package:shorebird_example_client/shorebird_example_client.dart';
+import 'package:shorebird_example_flutter/config/dependencies.dart';
 import 'package:shorebird_example_flutter/core/errors/failure.dart';
 import 'package:shorebird_example_flutter/data/services/api/serverpod_client.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
+@prod
+@staging
 @injectable
 class UserApiClient {
   final _log = Logger('UserApiClient');

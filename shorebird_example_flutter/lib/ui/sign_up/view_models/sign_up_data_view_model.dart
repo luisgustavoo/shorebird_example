@@ -3,7 +3,7 @@ import 'package:shorebird_example_flutter/data/repositories/sign_up/sign_up_repo
 import 'package:shorebird_example_flutter/utils/command.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
-@LazySingleton()
+@injectable
 class SignUpDataViewModel {
   SignUpDataViewModel({required SignUpRepository singUpRepository})
       : _singUpRepository = singUpRepository {

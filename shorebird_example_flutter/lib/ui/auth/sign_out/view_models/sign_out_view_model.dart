@@ -4,7 +4,7 @@ import 'package:shorebird_example_flutter/data/repositories/auth/auth_repository
 import 'package:shorebird_example_flutter/utils/command.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
-@LazySingleton()
+@injectable
 class SignOutViewModel {
   SignOutViewModel({
     required AuthRepository authRepository,

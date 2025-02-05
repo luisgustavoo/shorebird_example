@@ -12,8 +12,18 @@ class SplashViewModel {
   }
   final UpdateRepository _updateRepository;
   late final Command0<void> checkForUpdate;
+  bool isOutdated = false;
 
   Future<Result<void>> _checkForUpdate() async {
-    return _updateRepository.checkForUpdate();
+    final result = await _updateRepository.checkForUpdate();
+
+    switch (result) {
+      case Ok<bool>():
+        isOutdated = result.value ?? false;
+        return Result.ok();
+      case Error<bool>():
+        isOutdated = false;
+        return Result.error(result.error);
+    }
   }
 }

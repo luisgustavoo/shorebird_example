@@ -59,9 +59,7 @@ class _SignOutButtonState extends State<SignOutButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () async {
-        await widget.signOutViewModel.signOut.execute();
-      },
+      onPressed: widget.signOutViewModel.signOut.execute,
       icon: const Icon(Icons.logout),
     );
   }

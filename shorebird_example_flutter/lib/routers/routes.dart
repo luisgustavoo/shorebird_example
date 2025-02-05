@@ -4,4 +4,6 @@ abstract final class Routes {
   static const validation = 'validation';
   static const signupValidation = '$signup/$validation';
   static const home = '/home';
+  static const update = '/update';
+  static const splash = '/splash';
 }

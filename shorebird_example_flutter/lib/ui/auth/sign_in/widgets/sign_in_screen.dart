@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restart_app/restart_app.dart';
-import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'package:shorebird_example_flutter/routers/routes.dart';
 import 'package:shorebird_example_flutter/ui/auth/sign_in/view_models/sign_in_view_model.dart';
 import 'package:shorebird_example_flutter/ui/core/themes/colors.dart';
@@ -23,17 +21,11 @@ class _SignInScreenState extends State<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
-  final _updater = ShorebirdUpdater();
-  final _currentTrack = UpdateTrack.stable;
-  UpdateStatus status = UpdateStatus.unavailable;
 
   @override
   void initState() {
     super.initState();
     widget.signInViewModel.signIn.addListener(_onResult);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _checkForUpdate();
-    });
   }
 
   @override
@@ -47,25 +39,6 @@ class _SignInScreenState extends State<SignInScreen> {
   void dispose() {
     widget.signInViewModel.signIn.removeListener(_onResult);
     super.dispose();
-  }
-
-  Future<void> _checkForUpdate() async {
-    try {
-      status = await _updater.checkForUpdate(track: _currentTrack);
-      if (!mounted) {
-        return;
-      }
-      switch (status) {
-        case UpdateStatus.upToDate:
-        case UpdateStatus.outdated:
-          await _updater.update(track: _currentTrack);
-          setState(() {});
-        case UpdateStatus.restartRequired:
-        case UpdateStatus.unavailable:
-      }
-    } on UpdateException catch (error) {
-      debugPrint('Error checking for update: ${error.message}');
-    }
   }
 
   void _onResult() {
@@ -96,38 +69,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return switch (status) {
-      UpdateStatus.outdated => _buildUpdateApp(),
-      _ => _buildSignIn(),
-    };
-  }
-
-  Widget _buildUpdateApp() {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Nova versão disponível',
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Restart.restartApp(
-                  notificationTitle: 'Restarting App',
-                  notificationBody: 'Please tap here to open the app again.',
-                );
-              },
-              child: const Text('Reiniciar App'),
-            ),
-          ],
-        ),
-      ),
-    );
+    return _buildSignIn();
   }
 
   Widget _buildSignIn() {
@@ -196,6 +138,18 @@ class _SignInScreenState extends State<SignInScreen> {
                     context.push(Routes.signup);
                   },
                   child: const Text('Cadastrar'),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                ListenableBuilder(
+                  listenable: widget.signInViewModel,
+                  builder: (context, child) {
+                    return Text(
+                      'Patch ${widget.signInViewModel.patch?.number ?? 'não encontrado'}',
+                      textAlign: TextAlign.center,
+                    );
+                  },
                 ),
               ],
             ),

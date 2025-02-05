@@ -4,6 +4,7 @@ import 'package:shorebird_example_flutter/core/errors/failure.dart';
 import 'package:shorebird_example_flutter/data/services/shared_preferences_service.dart';
 import 'package:shorebird_example_flutter/utils/result.dart';
 
+@dev
 @injectable
 class LocalAuthService {
   LocalAuthService({

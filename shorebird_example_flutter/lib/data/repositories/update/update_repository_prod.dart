@@ -15,14 +15,17 @@ class UpdateRepositoryProd extends UpdateRepository {
   final ShorebirdUpdater _updater;
 
   final _currentTrack = UpdateTrack.stable;
-  UpdateStatus _status = UpdateStatus.unavailable;
 
   @override
-  Future<Result<void>> checkForUpdate() async {
+  Future<Result<bool>> checkForUpdate() async {
     try {
-      _status = await _updater.checkForUpdate(track: _currentTrack);
-      notifyListeners();
-      return Result.ok();
+      final status = await _updater.checkForUpdate(track: _currentTrack);
+      return switch (status) {
+        UpdateStatus.outdated ||
+        UpdateStatus.restartRequired =>
+          Result.ok(true),
+        _ => Result.ok(false)
+      };
     } on UpdateException catch (e, s) {
       log('Error checking for update: ${e.message}', error: e, stackTrace: s);
       return Result.error(Failure(message: e.message));
@@ -44,9 +47,19 @@ class UpdateRepositoryProd extends UpdateRepository {
   }
 
   @override
-  Future<Result<bool>> get isOutdated async {
-    final isOutdated = _status == UpdateStatus.outdated ||
-        _status == UpdateStatus.restartRequired;
-    return Result.ok(isOutdated);
+  Future<Result<Patch?>> getCurrentPatch() async {
+    try {
+      final patch = await _updater.readCurrentPatch();
+      return Result.ok(patch);
+    } on Exception {
+      return Result.error(Failure(message: 'Erro ao buscar patch atual'));
+    }
   }
+
+  // @override
+  // Future<Result<bool>> get isOutdated async {
+  //   final isOutdated = _status == UpdateStatus.outdated ||
+  //       _status == UpdateStatus.restartRequired;
+  //   return Result.ok(isOutdated);
+  // }
 }
