@@ -117,9 +117,9 @@ class AppRouter {
     GoRouterState state,
   ) async {
     final isSignedIn = await _authRepository.isAuthenticated;
+    final loggingIn = state.matchedLocation == Routes.signin;
 
     final skipRouters = [
-      Routes.signin,
       Routes.splash,
       Routes.update,
       Routes.updated,
@@ -135,7 +135,7 @@ class AppRouter {
       return Routes.signin;
     }
 
-    if (isSignedIn) {
+    if (loggingIn && isSignedIn) {
       return Routes.home;
     }
 

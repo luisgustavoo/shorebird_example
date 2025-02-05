@@ -15,7 +15,7 @@ class UpdatedScreen extends StatelessWidget {
               Icon(
                 Icons.check_circle,
                 color: Colors.green,
-                size: 50,
+                size: 200,
               ),
               SizedBox(
                 height: 16,
