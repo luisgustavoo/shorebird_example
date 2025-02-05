@@ -20,6 +20,7 @@ import 'package:shorebird_example_flutter/ui/splash/view_models/splash_view_mode
 import 'package:shorebird_example_flutter/ui/splash/widgets/splash_screen.dart';
 import 'package:shorebird_example_flutter/ui/update/view_models/update_view_model.dart';
 import 'package:shorebird_example_flutter/ui/update/widgets/update_screen.dart';
+import 'package:shorebird_example_flutter/ui/update/widgets/updated_screen.dart';
 
 @injectable
 class AppRouter {
@@ -97,6 +98,12 @@ class AppRouter {
             },
           ),
           GoRoute(
+            path: Routes.updated,
+            builder: (context, state) {
+              return const UpdatedScreen();
+            },
+          ),
+          GoRoute(
             path: '/shorebird',
             builder: (context, state) {
               return const ShorebirdScreen();
@@ -111,12 +118,16 @@ class AppRouter {
   ) async {
     final isSignedIn = await _authRepository.isAuthenticated;
 
-    final loggingIn = state.matchedLocation == Routes.signin;
-    final isSplash = state.matchedLocation == Routes.splash;
-    final isUpdate = state.matchedLocation == Routes.update;
-    final registering = state.fullPath?.startsWith(Routes.signup) ?? false;
+    final skipRouters = [
+      Routes.signin,
+      Routes.splash,
+      Routes.update,
+      Routes.updated,
+      Routes.signup,
+      Routes.signupValidation,
+    ];
 
-    if (registering || isSplash || isUpdate) {
+    if (skipRouters.contains(state.matchedLocation)) {
       return null;
     }
 
@@ -124,7 +135,7 @@ class AppRouter {
       return Routes.signin;
     }
 
-    if (loggingIn) {
+    if (isSignedIn) {
       return Routes.home;
     }
 

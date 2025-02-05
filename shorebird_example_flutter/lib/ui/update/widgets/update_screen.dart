@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:restart_app/restart_app.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shorebird_example_flutter/routers/routes.dart';
 import 'package:shorebird_example_flutter/ui/update/view_models/update_view_model.dart';
 
 class UpdateScreen extends StatefulWidget {
@@ -35,10 +36,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
 
   void _onResult() {
     if (widget.updateViewModel.download.completed) {
-      // Restart.restartApp(
-      //   notificationTitle: 'Restarting App',
-      //   notificationBody: 'Please tap here to open the app again.',
-      // );
+      context.go(Routes.updated);
     }
   }
 

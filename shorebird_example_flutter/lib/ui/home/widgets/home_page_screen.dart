@@ -61,7 +61,7 @@ class HomePageScreen extends StatelessWidget {
                           height: 16,
                         ),
                         Text(
-                          'Cor favorita: ${user!.favoriteColor!}',
+                          'Cor favorita: ${user?.favoriteColor!}',
                         ),
                       ],
                     ),

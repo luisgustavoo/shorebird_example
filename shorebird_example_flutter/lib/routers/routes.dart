@@ -6,4 +6,5 @@ abstract final class Routes {
   static const home = '/home';
   static const update = '/update';
   static const splash = '/splash';
+  static const updated = '/updated';
 }
