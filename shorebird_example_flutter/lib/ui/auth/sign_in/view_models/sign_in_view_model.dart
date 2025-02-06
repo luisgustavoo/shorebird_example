@@ -57,7 +57,7 @@ class SignInViewModel extends ChangeNotifier {
         return Result.ok();
       case Error<Patch?>():
         notifyListeners();
-        return Result.error(Failure(message: 'Erro ao buscar patch atual.'));
+        return Result.error(Failure(message: 'Erro ao buscar patch atual'));
     }
   }
 }
