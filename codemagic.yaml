@@ -1,40 +1,31 @@
 workflows:
-  shorebird-workflow:
-    name: Shorebird Deployment
+  flutter-shorebird-deploy:
+    name: Flutter Shorebird Deploy
     max_build_duration: 60
     environment:
+      flutter: stable
       groups:
-        - flutter # Certifique-se de ter o grupo "flutter" configurado com as variáveis necessárias
-      # vars:
-      #   SHOREBIRD_TOKEN:  # Adicione o token do Shorebird aqui (criptografado no Codemagic)
-    working_directory: shorebird_example_flutter # Define o diretório do projeto Flutter
+        - shorebird_credentials # Grupo contendo a variável SHOREBIRD_TOKEN
     scripts:
-      # Passo 1: Instala o Shorebird CLI e autentica
+      - name: Install dependencies
+        script: |
+          flutter --version
+          flutter pub get
       - name: Install Shorebird CLI
         script: |
-          dart pub global activate shorebird
-          export PATH="$PATH":"$HOME/.pub-cache/bin"
+          curl -sSf https://install.shorebird.dev | bash
+          export PATH="$HOME/.shorebird/bin:$PATH"
           shorebird --version
-          shorebird login --token $SHOREBIRD_TOKEN
-
-      # Passo 2: Instala dependências do Flutter
-      - name: Install Flutter dependencies
+      - name: Authenticate Shorebird
         script: |
-          flutter pub get
-
-      # Passo 3: Build do APK/AAB com Shorebird
-      - name: Build with Shorebird
+          shorebird login --access-token "$SHOREBIRD_TOKEN"
+      - name: Shorebird release for Android
         script: |
-          shorebird release android --release 
-
-      # Passo 4: Publica uma atualização via Shorebird (opcional)
-      # - name: Deploy Shorebird Patch
-      #   script: |
-      #     shorebird patch android
-    artifacts:
-      - build/**/outputs/apk/**/*.apk # Caminho do APK gerado
-      - shorebird_artifacts/**/*       # Artefatos do Shorebird (se necessário)
+          shorebird release android
+      - name: Shorebird release for iOS
+        script: |
+          shorebird release ios
     publishing:
       email:
         recipients:
-          - luisgustavodevbr@gmail.com
+          - "luisgustavodevbr@gmail.com"
