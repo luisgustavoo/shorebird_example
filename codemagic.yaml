@@ -1,0 +1,40 @@
+workflows:
+  shorebird-workflow:
+    name: Shorebird Deployment
+    max_build_duration: 60
+    environment:
+      groups:
+        - flutter # Certifique-se de ter o grupo "flutter" configurado com as variáveis necessárias
+      vars:
+        SHOREBIRD_TOKEN: Encrypted(eyJyZWZyZXNoX3Rva2VuIjoiMS8vMGhjVS1wMlZSdFVXb0NnWUlBUkFBR0JFU053Ri1MOUlyVTdidHFVWjVfWE5BaGRSeEc0VTNzaWwwWlhkNDN4dFM2eGJBTGlhVThGaVZBcFlUTklFM0U0VFNrWWVwTktKOElfYyIsImF1dGhfcHJvdmlkZXIiOiJnb29nbGUifQ==) # Adicione o token do Shorebird aqui (criptografado no Codemagic)
+    working_directory: shorebird_example_flutter # Define o diretório do projeto Flutter
+    scripts:
+      # Passo 1: Instala o Shorebird CLI e autentica
+      - name: Install Shorebird CLI
+        script: |
+          dart pub global activate shorebird
+          export PATH="$PATH":"$HOME/.pub-cache/bin"
+          shorebird --version
+          shorebird login --token $SHOREBIRD_TOKEN
+
+      # Passo 2: Instala dependências do Flutter
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+
+      # Passo 3: Build do APK/AAB com Shorebird
+      - name: Build with Shorebird
+        script: |
+          shorebird release android --release 
+
+      # Passo 4: Publica uma atualização via Shorebird (opcional)
+      # - name: Deploy Shorebird Patch
+      #   script: |
+      #     shorebird patch android
+    artifacts:
+      - build/**/outputs/apk/**/*.apk # Caminho do APK gerado
+      - shorebird_artifacts/**/*       # Artefatos do Shorebird (se necessário)
+    publishing:
+      email:
+        recipients:
+          - luisgustavodevbr@gmail.com
