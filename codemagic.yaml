@@ -6,6 +6,7 @@ workflows:
       flutter: stable
       groups:
         - shorebird_credentials # Grupo contendo a variável SHOREBIRD_TOKEN
+    working_directory: shorebird_example_flutter
     scripts:
       - name: Install dependencies
         script: |
