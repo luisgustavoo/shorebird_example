@@ -119,3 +119,4 @@ app.*.map.json
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
 shorebird-example-e5c564aae123.json
+/.key
