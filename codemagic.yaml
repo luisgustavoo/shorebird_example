@@ -14,7 +14,7 @@ workflows:
           flutter pub get
       - name: Install Shorebird CLI
         script: |
-          curl -sSf https://install.shorebird.dev | bash
+          dart pub global activate shorebird
           export PATH="$HOME/.shorebird/bin:$PATH"
           echo 'export PATH="$HOME/.shorebird/bin:$PATH"' >> $CM_ENV_FILE
           shorebird --version
