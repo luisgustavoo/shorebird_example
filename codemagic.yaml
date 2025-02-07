@@ -15,7 +15,7 @@ workflows:
       - name: Install Shorebird CLI
         script: |
           dart pub global activate shorebird
-          export PATH="$HOME/.shorebird/bin:$PATH"
+          echo 'export PATH="$HOME/.shorebird/bin:$PATH"' >> $CM_ENV_FILE
           shorebird --version
       - name: Authenticate Shorebird
         script: |
