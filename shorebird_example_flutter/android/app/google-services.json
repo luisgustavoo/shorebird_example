@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "746277047445",
+    "project_id": "shorebird-example",
+    "storage_bucket": "shorebird-example.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746277047445:android:78d47ac37b567bdb81df9c",
+        "android_client_info": {
+          "package_name": "br.dev.luisgustavo.shorebird_example_flutter.shorebird_example_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn6Kn9hewINFT1T9YjIfMFcrfROCNTnvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
