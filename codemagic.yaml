@@ -5,8 +5,8 @@ workflows:
     environment:
       groups:
         - flutter # Certifique-se de ter o grupo "flutter" configurado com as variáveis necessárias
-      vars:
-        SHOREBIRD_TOKEN: eyJyZWZyZXNoX3Rva2VuIjoiMS8vMGhjVS1wMlZSdFVXb0NnWUlBUkFBR0JFU053Ri1MOUlyVTdidHFVWjVfWE5BaGRSeEc0VTNzaWwwWlhkNDN4dFM2eGJBTGlhVThGaVZBcFlUTklFM0U0VFNrWWVwTktKOElfYyIsImF1dGhfcHJvdmlkZXIiOiJnb29nbGUifQ== # Adicione o token do Shorebird aqui (criptografado no Codemagic)
+      # vars:
+      #   SHOREBIRD_TOKEN:  # Adicione o token do Shorebird aqui (criptografado no Codemagic)
     working_directory: shorebird_example_flutter # Define o diretório do projeto Flutter
     scripts:
       # Passo 1: Instala o Shorebird CLI e autentica
