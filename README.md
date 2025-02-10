@@ -99,3 +99,11 @@ Luis Gustavo
 GitHub: [luisgustavoo](https://github.com/luisgustavoo)
 
 Email: [luisgustavodeevbr@gmail.com]()
+
+### 🙌 Agradecimentos
+Equipe do [Shorebird](https://shorebird.dev/) por criar uma ferramenta incrível para a comunidade Flutter.
+
+Comunidade Flutter por todo o suporte e recursos disponíveis.
+
+Feito com ❤️ por [Luis Gustavo](https://github.com/luisgustavoo).
+🌟 Dê uma estrela no repositório se você gostou do projeto!
