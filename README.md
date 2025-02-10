@@ -59,14 +59,10 @@ shorebird release
 
 ### 🗂️ Estrutura do Projeto
 ```bash
-shorebird_example/
-├── lib/
-│   └── main.dart          # Ponto de entrada do aplicativo
-├── assets/                # Arquivos estáticos (imagens, fonts, etc.)
-├── test/                  # Testes unitários e de integração
-├── pubspec.yaml           # Dependências do projeto
-├── README.md              # Este arquivo
-└── shorebird.yaml         # Configuração do Shorebird
+shorebird_example_client    # Estrutura que faz a ponte entre o projeto flutter e o servidor
+shorebird_example_flutter   # Aplicativo Flutter
+shorebird_example_servidor  # Servidor
+
 ```
 ### 📚 Documentação Adicional
 
