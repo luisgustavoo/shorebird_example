@@ -105,5 +105,6 @@ Equipe do [Shorebird](https://shorebird.dev/) por criar uma ferramenta incrível
 
 Comunidade Flutter por todo o suporte e recursos disponíveis.
 
-Feito com ❤️ por [Luis Gustavo](https://github.com/luisgustavoo).
+Feito com ❤️ por [Luis Gustavo](https://github.com/luisgustavoo).  
+
 🌟 Dê uma estrela no repositório se você gostou do projeto!
